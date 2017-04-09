@@ -22,6 +22,7 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
     - cmake              # [win]
     - python             # [win]
     - pkg-config         # [unix]
@@ -54,3 +55,4 @@ extra:
     - jakirkham
     - msarahan
     - pelson
+    - mingwandroid
