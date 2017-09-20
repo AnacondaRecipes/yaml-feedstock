@@ -1,7 +1,15 @@
 mkdir build
 cd build
 
-cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+:: These break the configure step:
+set CFLAGS=
+set CXXFLAGS=
+
+cmake -G "NMake Makefiles"               ^
+         -DCMAKE_BUILD_TYPE=Release      ^
+         -DCMAKE_C_FLAGS="%CFLAGS%"      ^
+         -DCMAKE_CXX_FLAGS="%CXXFLAGS%"  ^
+         ..
 if errorlevel 1 exit 1
 
 nmake
