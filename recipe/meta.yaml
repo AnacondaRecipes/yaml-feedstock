@@ -13,7 +13,7 @@ source:
     - CMakeLists.txt.patch
 
 build:
-  number: 2
+  number: 3
   run_exports:
     # good recent history, but not much info on how they treat minor ver:
     #   https://abi-laboratory.pro/tracker/timeline/yaml/
@@ -30,15 +30,15 @@ test:
   commands:
     # Check headers.
     - test -f "${PREFIX}/include/yaml.h"              # [unix]
-    - if not exist %LIBRARY_INC%\\yaml.h exit 1       # [win]
+    - if not exist "%LIBRARY_INC%\\yaml.h" exit 1     # [win]
 
     # Check libraries.
     - test -f "${PREFIX}/lib/libyaml.a"               # [unix]
     - test -f "${PREFIX}/lib/libyaml.dylib"           # [osx]
     - test -f "${PREFIX}/lib/libyaml.so"              # [linux]
-    - if not exist %LIBRARY_LIB%\\yaml_static.lib exit 1     # [win]
-    - if not exist %LIBRARY_LIB%\\yaml.lib exit 1     # [win]
-    - if not exist %LIBRARY_BIN%\\yaml.dll exit 1     # [win]
+    - if not exist "%LIBRARY_LIB%\\yaml_static.lib" exit 1  # [win]
+    - if not exist "%LIBRARY_LIB%\\yaml.lib" exit 1   # [win]
+    - if not exist "%LIBRARY_BIN%\\yaml.dll" exit 1   # [win]
 
 about:
   home: http://pyyaml.org/wiki/LibYAML
