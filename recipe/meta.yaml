@@ -13,7 +13,7 @@ source:
     - CMakeLists.txt.patch
 
 build:
-  number: 3
+  number: 4
   run_exports:
     # good recent history, but not much info on how they treat minor ver:
     #   https://abi-laboratory.pro/tracker/timeline/yaml/
@@ -22,6 +22,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - make               # [unix]
     - cmake              # [win]
     - pkg-config         # [unix]
     - libtool            # [unix]
