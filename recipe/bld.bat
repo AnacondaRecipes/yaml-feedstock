@@ -1,33 +1,25 @@
+:: MSVC is preferred.
+set CC=cl.exe
+set CXX=cl.exe
+
 mkdir build
 cd build
-
-:: These break the configure step:
-set CFLAGS=
-set CXXFLAGS=
-
-cmake -G "NMake Makefiles"               ^
-         -DCMAKE_BUILD_TYPE=Release      ^
-         -DCMAKE_C_FLAGS="%CFLAGS%"      ^
-         -DCMAKE_CXX_FLAGS="%CXXFLAGS%"  ^
-         ..
+cmake ^
+    -G "Ninja" ^
+    -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+    -DCMAKE_BUILD_TYPE=Release ^
+    -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=True ^
+    -DBUILD_SHARED_LIBS=ON ^
+    %SRC_DIR%
 if errorlevel 1 exit 1
 
-nmake
+:: Build.
+cmake --build . --config Release
 if errorlevel 1 exit 1
 
-:: No tests included in the cmake build.
-::
-:: ctest
-:: if errorlevel 1 exit 1
-
-copy ..\include\yaml.h %LIBRARY_INC%
+:: Install.
+cmake --build . --config Release --target install
 if errorlevel 1 exit 1
 
-copy yaml.dll %LIBRARY_BIN%
-if errorlevel 1 exit 1
-
-copy yaml.lib %LIBRARY_LIB%
-if errorlevel 1 exit 1
-
-copy yaml_static.lib %LIBRARY_LIB%
-if errorlevel 1 exit 1
+:: Remove extra output.
+del /f "%LIBRARY_PREFIX%\include\config.h"
