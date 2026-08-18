@@ -9,7 +9,7 @@ source:
   sha256: fa240dbf262be053f3898006d502d514936c818e422afdcf33921c63bed9bf2e
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # good recent history, but not much info on how they treat minor ver:
     #   https://abi-laboratory.pro/tracker/timeline/yaml/
@@ -17,6 +17,7 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - automake                           # [not win]
     - autoconf                           # [not win]
@@ -38,15 +39,15 @@ test:
     - if not exist "%LIBRARY_BIN%\\yaml.dll" exit 1   # [win]
 
 about:
-  home: http://pyyaml.org/wiki/LibYAML
+  home: https://pyyaml.org/wiki/LibYAML
   license: MIT
   license_file: License
+  license_family: MIT
   summary: A C library for parsing and emitting YAML
   description: |
     YAML is a human friendly data serialization standard for all programming
     languages.
-  doc_url: http://www.yaml.org/spec/1.2/spec.html
-  doc_source_url: https://github.com/yaml/www.yaml.org/tree/master/docs
+  doc_url: https://yaml.org/spec/1.2/spec.html
   dev_url: https://github.com/yaml
 
 extra:
