@@ -10,6 +10,7 @@ cmake ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=True ^
     -DBUILD_SHARED_LIBS=ON ^
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ^
     %SRC_DIR%
 if errorlevel 1 exit 1
 
